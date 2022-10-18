@@ -1,0 +1,131 @@
+
+#d-bar
+{
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.d-bar-item
+{
+    margin-left: 20px;
+}
+
+#myChart
+{
+    margin-bottom: 20px;
+    height: 400px;
+}
+
+#myDrags
+{
+    height: 400px;
+    width: 50px;
+    float: right;
+}
+
+.myDrag
+{
+    position: relative;
+}
+
+#myCanvas
+{
+    float: right;
+}
+
+#myPrices
+{
+    height: 400px;
+    width: 50px;
+    float: right;
+}
+
+#d-trade
+{
+    display: flex;
+}
+
+#d-trade-tools
+{
+    height: 200px;
+    float: right;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px #80808085 solid;
+}
+
+#d-trade-list
+{
+    height: 200px;
+    margin-right: 20px;
+    border: 1px #80808085 solid;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.d-t-tools-item .segment
+{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.d-t-tools-item button
+{
+    width: 77px !important;
+}
+
+.d-t-tools-item span
+{
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.d-t-tools-item input
+{
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.d-t-tools-item #lev
+{
+    margin-right: 13px;
+}
+
+#d-trade-tools .input
+{
+    width: 100px;
+    margin-right: 10px;
+}
+
+#d-trade-tools .toggle
+{
+    margin: 10px;
+    margin-left: 15px;
+}
+
+.myDrag
+{
+    width: 50px;
+    height: 20px;
+    color: white;
+    text-align: center;
+    padding: auto;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.d-c-Open
+{
+    background-color: #ff9800;
+}
+
+.d-c-Tp
+{
+    background-color: #089981;
+}
+
+.d-c-Sp
+{
+    background-color: #f23645;
+}

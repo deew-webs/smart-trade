@@ -1,0 +1,28 @@
+#o-pages
+{
+    height: 660px;
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+}
+
+.o-page
+{
+    float: right;
+    border: 1px #80808085 solid;
+    border-radius: 5px;
+}
+
+#o-main
+{
+    width: 300px;
+    margin-left: 20px;
+    padding: 20px;
+}
+#o-new
+{
+    width: auto;
+    flex: 1;
+    flex-direction: row;
+    padding: 20px;
+}

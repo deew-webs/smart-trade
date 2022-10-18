@@ -1,0 +1,144 @@
+
+<div id="s-page-tab-r1">
+    <div id="s-page-tab-r1-name">
+        <span>
+            تنظیمات حد سود: 
+        </span>
+    </div>
+    <div id="s-page-tab-r1-toggle">
+        <div class="ui toggle checkbox">
+            <input type="checkbox" name="tp-float">
+            <label>شناور</label>
+        </div>
+        <div class="ui toggle checkbox">
+            <input type="checkbox" name="tp-riskfree">
+            <label>ریسک فری</label>
+        </div>
+        <div class="ui toggle checkbox">
+            <input type="checkbox" name="tp-market">
+            <label>معامله مارکت</label>
+        </div>
+    </div>
+</div>
+
+<div id="s-page-tab-r2">
+    <!-------------------------------------------------- Tp 0 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="tp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="tp-0-c" checked>
+            <label>Tp 0</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider tp-point-q" oninput="sliderChange(this)" name="tp-0-q" type="range" min="10" max="100" value="20" step="10">
+        <span id="tp-0-q">20%</span>
+        <input class="s-r2-slider s-r2-slider-p slider tp-point-p" oninput="sliderChange(this)" name="tp-0-p" type="range" min="0.1" max="30" value="0.4" step="0.1">
+        <span id="tp-0-p">0.4%</span>
+    </div>
+    
+    <!-------------------------------------------------- Tp 1 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="tp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="tp-1-c" checked>
+            <label>Tp 1</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider tp-point-q" oninput="sliderChange(this)" name="tp-1-q" type="range" min="10" max="100" value="40" step="10">
+        <span id="tp-1-q">40%</span>
+        <input class="s-r2-slider s-r2-slider-p slider tp-point-p" oninput="sliderChange(this)" name="tp-1-p" type="range" min="0.1" max="30" value="0.7" step="0.1">
+        <span id="tp-1-p">0.7%</span>
+    </div>
+    
+    <!-------------------------------------------------- Tp 2 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="tp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="tp-2-c" checked>
+            <label>Tp 2</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider tp-point-q" oninput="sliderChange(this)" name="tp-2-q" type="range" min="10" max="100" value="40" step="10">
+        <span id="tp-2-q">40%</span>
+        <input class="s-r2-slider s-r2-slider-p slider tp-point-p" oninput="sliderChange(this)" name="tp-2-p" type="range" min="0.1" max="30" value="1.4" step="0.1">
+        <span id="tp-2-p">1.4%</span>
+    </div>
+    
+    <!-------------------------------------------------- Tp 3 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="tp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="tp-3-c">
+            <label>Tp 3</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider tp-point-q" oninput="sliderChange(this)" name="tp-3-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="tp-3-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider tp-point-p" oninput="sliderChange(this)" name="tp-3-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="tp-3-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Tp 4 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="tp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="tp-4-c">
+            <label>Tp 4</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider tp-point-q" oninput="sliderChange(this)" name="tp-4-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="tp-4-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider tp-point-p" oninput="sliderChange(this)" name="tp-4-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="tp-4-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Tp 5 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="tp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="tp-5-c">
+            <label>Tp 5</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider tp-point-q" oninput="sliderChange(this)" name="tp-5-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="tp-5-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider tp-point-p" oninput="sliderChange(this)" name="tp-5-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="tp-5-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Tp 6 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="tp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="tp-6-c">
+            <label>Tp 6</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider tp-point-q" oninput="sliderChange(this)" name="tp-6-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="tp-6-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider tp-point-p" oninput="sliderChange(this)" name="tp-6-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="tp-6-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Tp 7 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="tp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="tp-7-c">
+            <label>Tp 7</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider tp-point-q" oninput="sliderChange(this)" name="tp-7-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="tp-7-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider tp-point-p" oninput="sliderChange(this)" name="tp-7-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="tp-7-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Tp 8 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="tp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="tp-8-c">
+            <label>Tp 8</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider tp-point-q" oninput="sliderChange(this)" name="tp-8-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="tp-8-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider tp-point-p" oninput="sliderChange(this)" name="tp-8-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="tp-8-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Tp 9 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="tp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="tp-9-c">
+            <label>Tp 9</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider tp-point-q" oninput="sliderChange(this)" name="tp-9-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="tp-9-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider tp-point-p" oninput="sliderChange(this)" name="tp-9-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="tp-9-p">0.1%</span>
+    </div>
+</div>

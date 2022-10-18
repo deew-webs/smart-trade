@@ -1,0 +1,171 @@
+#s-pages
+{
+    height: 660px;
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+}
+
+.s-page
+{
+    float: right;
+    border: 1px #80808085 solid;
+    border-radius: 5px;
+}
+
+#s-list
+{
+    width: 300px;
+    margin-left: 20px;
+    padding: 20px;
+}
+
+#s-list table
+{
+    text-align: center;
+}
+
+#s-new
+{
+    width: auto;
+    flex: 1;
+    flex-direction: row;
+    padding: 20px;
+}
+
+#s-page-top
+{
+    display: flex;
+}
+
+#s-p-top-button
+{
+    flex: 1;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+}
+
+#s-p-top-button button
+{
+    float: left;
+}
+
+#s-page-tab
+{
+    margin-top: 20px;
+}
+
+#s-page-tab-r1
+{
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    height: 30px !important;
+    margin-top: 10px;
+}
+
+#s-page-tab-r1-name
+{
+    width: 300px;
+    float: right;
+}
+
+#s-page-tab-r1-toggle
+{
+    flex:1;
+    flex-direction: row;
+    direction: ltr;
+    width: auto;
+    float: right;
+}
+
+#s-page-tab-r2
+{
+    margin-top: 20px;
+    direction: ltr;
+}
+
+.s-r2-point
+{
+    border-top: 1px gray dotted;
+    border-radius: 5px;
+    padding: 10px;
+    height: 43px;
+}
+
+.s-r2-point label
+{
+    font-size: 20px !important;
+}
+
+.s-r2-point span
+{
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+.s-r2-slider
+{
+    margin-left: 30px;
+    margin-top: 0px;
+}
+
+.s-r2-slider-q
+{
+    width: 100px;
+}
+
+.s-r2-slider-p
+{
+    width: 350px;
+}
+
+.checkbox
+{
+    margin-right: 20px;
+}
+
+.toggle
+{
+    float: left !important;
+}
+
+
+
+
+
+
+
+
+
+
+.slider {
+    -webkit-appearance: none;
+    width: 200px;
+    height: 21px;
+    background-color: gray !important;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 21px;
+    height: 21px;
+    background: #0091ff;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 21px;
+    height: 21px;
+    background: #0091ff;
+    cursor: pointer;
+  }

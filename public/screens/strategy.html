@@ -1,0 +1,61 @@
+<div id="s-pages">
+    <div class="s-page" id="s-list">
+        <table class="ui very basic table">
+            <thead>
+                <tr>
+                <th>نام</th>
+                <th>حد سود</th>
+                <th>حد ضرر</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>استراتژی اول</td>
+                    <td>3</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>استراتژی اسکلپ</td>
+                    <td>5</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>استراتژی ساعتی</td>
+                    <td>4</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="s-page" id="s-new">
+
+        <div id="s-page-top">
+            <div id="s-p-top-name">
+                <span>
+                    نام استراتژی: 
+                </span>
+                <div class="ui input">
+                    <input id="s-name" name="s-name" type="text" placeholder="نام استراتژی را وارد کنید...">
+                </div>
+            </div>
+            <div id="s-p-top-button" class="ui inverted segment">
+                <button class="ui inverted blue button vazir">ذخیره</button>
+            </div>
+        </div>
+
+        <div id="s-page-tab">
+            <div class="App vazir">
+                <div class="ui top attached tabular menu tab-tpsp">
+                    <a onclick="doTab('tpsp', 'tp')" class="item active" data-tab="tp">تنظیمات حد سود</a>
+                    <a onclick="doTab('tpsp', 'sp')" class="item" data-tab="sp">تنظیمات حد ضرر</a>
+                </div>
+                <div id="tab-tp" class="ui bottom attached tab segment segment-tpsp active" data-tab="tp">
+                    <script> $(function(){ $('#tab-tp').load("./screens/tp.html"); }); </script>
+                </div>
+                <div id="tab-sp" class="ui bottom attached tab segment segment-tpsp" data-tab="sp">
+                    <script> $(function(){ $('#tab-sp').load("./screens/sp.html", null, () => { s_DoIT() }); }); </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

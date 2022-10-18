@@ -1,0 +1,30 @@
+#simple-toaster
+  .toast
+    z-index: 9999
+    padding: 20px
+    width: 100%
+    max-width: 300px
+    position: fixed
+    bottom: 0px
+    left: 10px
+    color: white
+    transition: .3s
+    transform: translateY(0)
+    opacity: 0
+    font-size: 12px
+    background: rgba(#23252B, .9)
+    &.error
+      background: rgba(darkred, .9)
+    &.warning
+      background: rgba(darkorange, .9)
+    &.success
+      background: rgba(#3CBC4B, .9)
+    &.active
+      opacity: 1
+      bottom: 10px
+    @media (max-width: 568px)
+      max-width: none
+      width: calc(100% - 40px)
+      margin: auto
+      left: 0
+      right: 0

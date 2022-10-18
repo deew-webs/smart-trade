@@ -1,0 +1,29 @@
+.js.download"
+.js"
+
+"https://the-first-to-go.webflow.io/#
+"#
+
+type="submit"
+type="button"
+
+"./index_files/css"
+"./index_files/css.css"
+
+  <link href="./assets/css/toastr.css" rel="stylesheet" type="text/css">
+  <link href="./assets/css/deew.chart.css" rel="stylesheet" type="text/css">
+  <link href="./assets/css/index.css" rel="stylesheet" type="text/css">
+
+
+  <script type="text/javascript" src="./assets/script/md5.min.js"></script>
+  <script type="text/javascript" src="./assets/script/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/script/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script src="./assets/script/toastr.min.js"></script>
+  <script src="./assets/script/configs.js"></script>
+  <script src="./assets/script/deew.node.js"></script>
+  <script src="./assets/script/deew.chart.js"></script>
+  <script src="./assets/script/index.js"></script>
+</body>
+
+

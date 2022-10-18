@@ -1,0 +1,75 @@
+{
+  info: {
+    orderId: '18949675013',
+    symbol: 'DOGEUSDT',
+    status: 'NEW',
+    clientOrderId: 'x-xcKtGhcub6024baaefc543678ffa6b',
+    price: '0.059000',
+    avgPrice: '0.000000',
+    origQty: '622',
+    executedQty: '0',
+    cumQty: '0',
+    cumQuote: '0',
+    timeInForce: 'GTC',
+    type: 'LIMIT',
+    reduceOnly: false,
+    closePosition: false,
+    side: 'BUY',
+    positionSide: 'BOTH',
+    stopPrice: '0',
+    workingType: 'CONTRACT_PRICE',
+    priceProtect: false,
+    origType: 'LIMIT',
+    updateTime: '1663689933982'
+  },
+  id: '18949675013',
+  clientOrderId: 'x-xcKtGhcub6024baaefc543678ffa6b',
+  timestamp: 1663689933982,
+  datetime: '2022-09-20T16:05:33.982Z',
+  lastTradeTimestamp: undefined,
+  symbol: 'DOGE/USDT',
+  type: 'limit',
+  timeInForce: 'GTC',
+  postOnly: false,
+  reduceOnly: false,
+  side: 'buy',
+  price: 0.059,
+  stopPrice: undefined,
+  amount: 622,
+  cost: 0,
+  average: undefined,
+  filled: 0,
+  remaining: 622,
+  status: 'open',
+  fee: undefined,
+  trades: [],
+  fees: []
+}
+
+
+
+{
+  p0: {
+    vals: {
+      session: 'b247d66c034cc5c75526581e95bb2188',
+      symbol: 'BTCUSDT',
+      entry: 18000,
+      side: 'LONG',
+      qty: 5,
+      qty2: '%',
+      lev: 12,
+      en_limit: true,
+      strategy: 'some other',
+      access: "All Account's",
+      sp: 18297,
+      tp_q_1: 100,
+      tp_p_1: 18180
+    },
+    accounts: [ [Object] ],
+    fill: 0,
+    total: 1,
+    edited: 1663861936107,
+    tickerSp: false,
+    tickerTp: 1
+  }
+}

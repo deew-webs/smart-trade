@@ -1,0 +1,144 @@
+
+<div id="s-page-tab-r1">
+    <div id="s-page-tab-r1-name">
+        <span>
+            تنظیمات حد ضرر: 
+        </span>
+    </div>
+    <div id="s-page-tab-r1-toggle">
+        <div class="ui toggle checkbox">
+            <input type="checkbox" name="sp-float">
+            <label>شناور</label>
+        </div>
+        <div class="ui toggle checkbox">
+            <input type="checkbox" name="sp-riskfree">
+            <label>ریسک فری</label>
+        </div>
+        <div class="ui toggle checkbox">
+            <input type="checkbox" name="sp-market">
+            <label>معامله مارکت</label>
+        </div>
+    </div>
+</div>
+
+<div id="s-page-tab-r2">
+    <!-------------------------------------------------- Sp 0 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="sp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="sp-0-c" checked>
+            <label>Sp 0</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider sp-point-q" oninput="sliderChange(this)" name="sp-0-q" type="range" min="10" max="100" value="50" step="10">
+        <span id="sp-0-q">50%</span>
+        <input class="s-r2-slider s-r2-slider-p slider sp-point-p" oninput="sliderChange(this)" name="sp-0-p" type="range" min="0.1" max="30" value="1.1" step="0.1">
+        <span id="sp-0-p">1.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Sp 1 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="sp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="sp-1-c" checked>
+            <label>Sp 1</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider sp-point-q" oninput="sliderChange(this)" name="sp-1-q" type="range" min="10" max="100" value="50" step="10">
+        <span id="sp-1-q">50%</span>
+        <input class="s-r2-slider s-r2-slider-p slider sp-point-p" oninput="sliderChange(this)" name="sp-1-p" type="range" min="0.1" max="30" value="2.1" step="0.1">
+        <span id="sp-1-p">2.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Sp 2 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="sp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="sp-2-c">
+            <label>Sp 2</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider sp-point-q" oninput="sliderChange(this)" name="sp-2-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="sp-2-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider sp-point-p" oninput="sliderChange(this)" name="sp-2-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="sp-2-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Sp 3 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="sp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="sp-3-c">
+            <label>Sp 3</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider sp-point-q" oninput="sliderChange(this)" name="sp-3-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="sp-3-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider sp-point-p" oninput="sliderChange(this)" name="sp-3-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="sp-3-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Sp 4 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="sp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="sp-4-c">
+            <label>Sp 4</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider sp-point-q" oninput="sliderChange(this)" name="sp-4-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="sp-4-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider sp-point-p" oninput="sliderChange(this)" name="sp-4-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="sp-4-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Sp 5 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="sp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="sp-5-c">
+            <label>Sp 5</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider sp-point-q" oninput="sliderChange(this)" name="sp-5-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="sp-5-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider sp-point-p" oninput="sliderChange(this)" name="sp-5-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="sp-5-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Sp 6 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="sp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="sp-6-c">
+            <label>Sp 6</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider sp-point-q" oninput="sliderChange(this)" name="sp-6-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="sp-6-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider sp-point-p" oninput="sliderChange(this)" name="sp-6-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="sp-6-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Sp 7 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="sp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="sp-7-c">
+            <label>Sp 7</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider sp-point-q" oninput="sliderChange(this)" name="sp-7-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="sp-7-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider sp-point-p" oninput="sliderChange(this)" name="sp-7-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="sp-7-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Sp 8 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="sp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="sp-8-c">
+            <label>Sp 8</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider sp-point-q" oninput="sliderChange(this)" name="sp-8-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="sp-8-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider sp-point-p" oninput="sliderChange(this)" name="sp-8-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="sp-8-p">0.1%</span>
+    </div>
+    
+    <!-------------------------------------------------- Sp 9 ---------->
+    <div class="s-r2-point">
+        <div class="ui toggle checkbox">
+            <input class="sp-point-c" onchange="pointToggleChange(this)" type="checkbox" name="sp-9-c">
+            <label>Sp 9</label>
+        </div>
+        <input class="s-r2-slider s-r2-slider-q slider sp-point-q" oninput="sliderChange(this)" name="sp-9-q" type="range" min="10" max="100" value="10" step="10">
+        <span id="sp-9-q">10%</span>
+        <input class="s-r2-slider s-r2-slider-p slider sp-point-p" oninput="sliderChange(this)" name="sp-9-p" type="range" min="0.1" max="30" value="0.1" step="0.1">
+        <span id="sp-9-p">0.1%</span>
+    </div>
+</div>

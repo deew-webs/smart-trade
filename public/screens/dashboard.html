@@ -1,0 +1,67 @@
+
+<div id="d-bar">
+    <select class="d-bar-item vazir ui search dropdown">
+        <option value="">ایجاد پوزیشن جدید</option>
+        <option value="P1">پوزیشن شماره 1</option>
+        <option value="P2">پوزیشن شماره 2</option>
+    </select>
+    <span class="d-bar-item">
+        <span>میزان کل دارایی: </span>
+        <span id="d-balance">120$</span>
+    </span>
+    <span class="d-bar-item">
+        <span>میزان دارایی تتر: </span>
+        <span id="d-tether">80$</span>
+    </span>
+</div>
+
+<div id="myChart">
+    <div id="myDrags">
+        <div id="d-c-Tp-0" class="myDrag d-c-Tp"></div>
+        <div id="d-c-Open" class="myDrag d-c-Open"></div>
+        <div id="d-c-Sp-0" class="myDrag d-c-Sp"></div>
+    </div>
+    <canvas id="myCanvas">
+
+    </canvas>
+    <div id="myPrices">
+
+    </div>
+</div>
+
+<div id="d-trade">
+    <div id="d-trade-tools">
+        <div class="d-t-tools-item">
+            <select class="d-bar-item vazir ui search dropdown">
+                <option value="">استراتژی اول</option>
+                <option value="P1">استراتژی دوم</option>
+                <option value="P2">استراتژی سوم</option>
+            </select>
+        </div>
+        <div class="d-t-tools-item">
+            <div class="ui inverted segment">
+                <button class="ui inverted red button vazir">فروش</button>
+                <button class="ui inverted green button vazir">خرید</button>
+            </div>
+        </div>
+        <div class="d-t-tools-item">
+            <span id="lev">x10</span>
+            <input oninput="leverageChange(this)" name="lev" type="range" min="1" max="99" value="10" step="1">
+        </div>
+        <div class="d-t-tools-item">
+            <span id="qty">05%</span>
+            <input oninput="quantityChange(this)" name="qty" type="range" min="1" max="99" value="5" step="1">
+        </div>
+        <div class="ui toggle checkbox">
+            <input class="" onchange="marketToggleChange(this)" type="checkbox" name="" checked>
+            <label></label>
+        </div>
+        <div class="ui input">
+            <input id="d-entery" name="s-name" type="text" placeholder="قیمت ورود ..." disabled>
+        </div>
+    </div>
+    
+    <div id="d-trade-list">
+    
+    </div>
+</div>
