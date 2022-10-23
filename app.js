@@ -9,7 +9,6 @@ const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const ccxt = require ('ccxt');
 const schedule = require('node-schedule');
-const {	Worker } = require("worker_threads");
 
 console.log('-------------------------------------------------------------------------');
 const deew = new DEEW();
@@ -17,7 +16,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 var mongo, accounts = [], positions = {}, pids = 0, accsUpdate = false;
-var bin = new ccxt.binance({options:{'defaultType':'future'}});;
+var bin = new ccxt.binance({options:{'defaultType':'future', enableRateLimit: true}});;
 
 
 // MARK: mongo startup stuff ...
@@ -54,16 +53,16 @@ async function openup()
 {
     let key = 'Lbq9CdM34GLqQZ79pWaXH4nZv4Vvyen6ZyGNpdnzhosUmCn6Lx8SVvHDRP2gTH8o';
     let sec = 'iaFnEeHkL7ShD7WEO80myeWYv6GZhtJgaDOQbcLEi0zrwp6bvVI8D39a7t991IpR';
-    let acc = new ccxt.binance({options:{'defaultType':'future'}, apiKey: key, secret: sec});
+    let acc = new ccxt.binance({options:{'defaultType':'future'}, apiKey: key, secret: sec, enableRateLimit: true});
     console.log((await acc.fetchBalance()).USDT.total);
 
-    let ords = await acc.fetchOrders('DOGEUSDT');
+    let ords = await acc.fetchOrders('BTCUSDT');
     ords.forEach(async o =>
     {
         if(o.status != 'closed' && o.status != 'canceled')
         {
             console.log(o);
-            await acc.cancelOrder(o.id, 'DOGEUSDT');
+            await acc.cancelOrder(o.id, 'BTCUSDT');
         }
     });
 
@@ -79,14 +78,14 @@ async function openup()
 
     let key2 = 'KMGKgdKXIEmwCNUZKB';
     let sec2 = 'BtEbnBVTL1QPHwHeo1InZgYrrLbjZeUgNIzs';
-    let acc2 = new ccxt.bybit({options:{'defaultType':'future'}, apiKey: key2, secret: sec2});
+    let acc2 = new ccxt.bybit({options:{'defaultType':'future'}, apiKey: key2, secret: sec2, enableRateLimit: true});
     console.log((await acc2.fetchBalance()).USDT.total);
     //console.log(acc2.has);
     
     let key3 = '86d65e8a-6b83-424c-9e95-358a7aa60560';
     let sec3 = '6FDD545AE67B4C4431D8CE6C0226789F';
     let pass = '912#Test';
-    let acc3 = new ccxt.okex({options:{'defaultType':'future'}, apiKey: key3, secret: sec3, password: pass});
+    let acc3 = new ccxt.okex({options:{'defaultType':'future'}, apiKey: key3, secret: sec3, password: pass, enableRateLimit: true});
     console.log((await acc3.fetchBalance()).USDT.total);
 
     //console.log(JSON.stringify(await bin.fetchOHLCV ('BTCUSDT', timeframe = '5m', limit = 300)));
@@ -436,11 +435,11 @@ async function UpdateAccounts()
         try
         {
             if(a.broker == "Binance")
-                a.api = new ccxt.binance({options:{'defaultType':'future'}, apiKey: a.key, secret: a.secret});
+                a.api = new ccxt.binance({options:{'defaultType':'future'}, apiKey: a.key, secret: a.secret, enableRateLimit: true});
             if(a.broker == "Bybit")
-                a.api = new ccxt.bybit({options:{'defaultType':'future'}, apiKey: a.key, secret: a.secret});
+                a.api = new ccxt.bybit({options:{'defaultType':'future'}, apiKey: a.key, secret: a.secret, enableRateLimit: true});
             if(a.broker == "OKEX")
-                a.api = new ccxt.okex({options:{'defaultType':'future'}, apiKey: a.key, secret: a.secret, password: a.pass});
+                a.api = new ccxt.okex({options:{'defaultType':'future'}, apiKey: a.key, secret: a.secret, password: a.pass, enableRateLimit: true});
     
             a.balance = (await a.api.fetchBalance()).USDT.total;
         }
@@ -460,13 +459,13 @@ async function HandleTrades()
 {
     Object.keys(positions).forEach(async (f, i) =>
     {
-        let p = positions[f];
-        let now = (await bin.fetchTicker (p.vals.symbol)).close;
         let time = Math.floor(Date.now() / 1000);
-        console.log(p.vals.symbol, now);
-
         if(time%5 != 0)
             return;
+
+        let p = positions[f];
+        let now = (await bin.fetchTicker (p.vals.symbol)).close;
+        console.log(p.vals.symbol, now);
 
         p.accounts.forEach(async (a, i) =>
         {

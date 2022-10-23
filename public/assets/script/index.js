@@ -80,6 +80,9 @@ function funcOnLoaded()
                 }
             });
             toastr["success"]("You're verifyed successfully!", "Authorise State");
+
+            //--
+            setInterval(funcListPositions, 2000);
         }
     });
     
@@ -259,7 +262,7 @@ function funcListStrategy()
                 dropStrategys.innerHTML = "";
                 
                 strategys = res.message;
-                res.message.forEach((item, i) =>
+                strategys.forEach((item, i) =>
                 {
                     //-- add strategys items
                     let mee = __c_strategyItem.replace('[ID]', 's-item-'+i);
@@ -460,7 +463,7 @@ function funcOpenPosition(side)
             if(res.ok == true)
             {
                 toastr["success"]("Position added successfully!", "Position's");
-                funcListStrategy();
+                funcListPositions();
             }
             else
                 toastr["error"](res.message, "Position's");
@@ -481,19 +484,23 @@ function funcListPositions()
         {
             if(res.ok == true)
             {
+                console.log(res);
                 let parent_trades = document.getElementById('d-div-trades');
                 parent_trades.innerHTML = "";
                 let lst_trades = document.getElementById('d-drop-positions-lst');
                 lst_trades.innerHTML = "";
                 
-                strategys = res.message;
-                res.message.forEach((item, i) =>
+                let poss = Object.keys(res.message);
+                poss.forEach((f, i) =>
                 {
+                    
+                    let item = res.message[f];
+
                     //-- add positions items
                     let mee = __c_positionItem.replace('[ID]', 'd-div-trade-'+i);
                     mee = mee.replace('[SYMBOL]', item.vals.symbol);
                     mee = mee.replace('[SP]', item.sp+"%");
-                    document.getElementById('d-div-positions').insertAdjacentHTML('beforeend', mee);
+                    document.getElementById('d-div-trades').insertAdjacentHTML('beforeend', mee);
 
                     let it = document.getElementById('d-div-trade-'+i);
                     it.onmouseover = (e) =>
