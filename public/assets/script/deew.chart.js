@@ -26,7 +26,7 @@ var canvas;
 var ctx;
 var centerPoint;
 var boundaries;
-var _the_symbol = "BTCUSDT", _the_timeframe = "1m";
+var _the_symbol = "BTCUSDT", _the_timeframe = "5m";
 var _the_pos = [{'price':19950}, {'price':19680}, {'price':19550}];
 var _the_price = 0;
 
@@ -34,8 +34,37 @@ var _the_price = 0;
 var xLines = 8;
 var yLines = 10;
 
+
+var hp = 0;
+var lp = Infinity;
+var dataUri = null;
+var dateRange = ["", ""];
+var ohlc = [];
+var volume = [];
+
 function DoIT()
 {
+  //-- reset cache
+  w = 0;
+  h = 0;
+  w_offset = 0;
+  h_offset = 0;
+
+  candleOhlcMappings = [];
+  info = {yMin: [], xMin: [], yMax: [], xMax: [], l: 0, h: 0, minDate: "", maxDate: ""}
+
+  hp = 0;
+  lp = Infinity;
+  dataUri = null;
+  dateRange = ["", ""];
+  ohlc = [];
+  volume = [];
+
+  canvas = null;
+  ctx = null;
+  centerPoint = null;
+  boundaries = null;
+
   canvas = document.getElementById("myCanvas");
   w_offset = window.innerWidth - document.getElementById("myChart").offsetWidth;
   h_offset = window.innerHeight - document.getElementById("myChart").offsetHeight;
@@ -103,7 +132,7 @@ function drawCandles()
   let timeSlot = getTimeslots(ohlc);
   let idx = 0;
 
-  for (var candle of ohlc)
+  for (let candle of ohlc)
   {
     //x = maxPx - ((price - minPrice)/(maxPrice-minPrice)*maxPx)
     let calculatePosition = (price) =>
@@ -226,7 +255,7 @@ function createGrid()
   let drawVertical = (xPoints) =>
   {
     drawLine([0, 0], [0, h]);
-    for (var point of xPoints)
+    for (let point of xPoints)
       drawLine([point, h], [point, 0], "#242733")
   }
 
@@ -239,7 +268,7 @@ function createGrid()
 
 function getPosCompareCanvas(canvas, evt)
 {
-  var rect = canvas.getBoundingClientRect();
+  let rect = canvas.getBoundingClientRect();
   return {
     x: evt.clientX - rect.left,
     y: evt.clientY - rect.top
@@ -250,12 +279,6 @@ function getPosCompareCanvas(canvas, evt)
 
 
 //------------------------- download (alphavantage) codes
-var hp = 0;
-var lp = Infinity;
-var dataUri = null;
-var dateRange = ["", ""];
-var ohlc = [];
-var volume = [];
 
 
 
@@ -274,13 +297,13 @@ function DownAlphavantage()
       success: function (data)
       {
           // split the data set into ohlc and volume
-        var i = 0;
-        var dataArray = data['Time Series (Daily)'];
-        for (var time in dataArray)
+        let i = 0;
+        let dataArray = data['Time Series (Daily)'];
+        for (let time in dataArray)
         {
-          var stock_info = dataArray[time];
+          let stock_info = dataArray[time];
 
-          var newOHLC = [
+          let newOHLC = [
             time,
             Number(stock_info["1. open"]),
             Number(stock_info["2. high"]),
@@ -337,6 +360,8 @@ function DownBinance()
       success: function (d)
       {
         itsWorking2 = false;
+        hp = 0;
+        lp = Infinity;
 
         if(d.ok && d.message)
         {
@@ -474,11 +499,11 @@ function MouseMove (evt)
 {
   if(dataUri != null)
   {
-    var mousePos = getPosCompareCanvas(canvas, evt);
-    var message = 'مختصات ماوس: ' + mousePos.x + ',' + mousePos.y;
+    let mousePos = getPosCompareCanvas(canvas, evt);
+    let message = 'مختصات ماوس: ' + mousePos.x + ',' + mousePos.y;
     //document.getElementById('pos').innerText = message;
 
-    var img = new Image();
+    let img = new Image();
     img.src = dataUri;
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 

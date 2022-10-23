@@ -77,12 +77,81 @@ function funcOnLoaded()
                 {
                     //-- handle symbol dropdown
                     document.getElementById('d-drop-symbol-txt').innerText = ff.id;
+                    dropSymbols.setAttribute('class', 'w-dropdown-list');
+                    _the_symbol = ff.id;
+                    DoIT();
                 }
             });
             toastr["success"]("You're verifyed successfully!", "Authorise State");
 
             //--
             setInterval(funcListPositions, 2000);
+
+
+
+            //-- Drop Down configs (Broker)
+            let dropBrokers = document.getElementById('a-drop-broker-lst');
+            dropBrokers.innerHTML = "";
+            //dropBrokers.setAttribute('style', 'overflow-y:auto; height:600px;');
+
+            arr = ['Binance', 'Bybit', 'OKEX'];
+            arr.forEach((f, i) =>
+            {
+                //-- add broker dropdown
+                let mee = __c_dropdownItem.replace('[ID]', 'drop-broker-'+i);
+                mee = mee.replace('[TEXT]', f);
+                dropBrokers.insertAdjacentHTML('beforeend', mee);
+                document.getElementById('drop-broker-'+i).onclick = (e) =>
+                {
+                    //-- handle broker dropdown
+                    document.getElementById('a-drop-broker-txt').innerText = f;
+                    dropBrokers.setAttribute('class', 'w-dropdown-list');
+                }
+            });
+
+
+            //-- Drop Down configs (timeframe)
+            let dropTimeframes = document.getElementById('d-drop-timeframe-lst');
+            dropTimeframes.innerHTML = "";
+            //dropTimeframes.setAttribute('style', 'overflow-y:auto; height:600px;');
+
+            arr = ['1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M'];
+            arr.forEach((f, i) =>
+            {
+                //-- add timeframe dropdown
+                let mee = __c_dropdownItem.replace('[ID]', 'drop-timeframe-'+i);
+                mee = mee.replace('[TEXT]', f);
+                dropTimeframes.insertAdjacentHTML('beforeend', mee);
+                document.getElementById('drop-timeframe-'+i).onclick = (e) =>
+                {
+                    //-- handle timeframe dropdown
+                    document.getElementById('d-drop-timeframe-txt').innerText = f;
+                    dropTimeframes.setAttribute('class', 'w-dropdown-list');
+                    _the_timeframe = f;
+                    DoIT();
+                }
+            });
+
+
+            //-- Drop Down configs (selected)
+            let dropSelecteds = document.getElementById('d-drop-selected-lst');
+            dropSelecteds.innerHTML = "";
+            //dropSelecteds.setAttribute('style', 'overflow-y:auto; height:600px;');
+
+            arr = ['Main Account', "My Account's", "All Account's"];
+            arr.forEach((f, i) =>
+            {
+                //-- add selected dropdown
+                let mee = __c_dropdownItem.replace('[ID]', 'drop-selected-'+i);
+                mee = mee.replace('[TEXT]', f);
+                dropSelecteds.insertAdjacentHTML('beforeend', mee);
+                document.getElementById('drop-selected-'+i).onclick = (e) =>
+                {
+                    //-- handle selected dropdown
+                    document.getElementById('d-drop-selected-txt').innerText = f;
+                    dropSelecteds.setAttribute('class', 'w-dropdown-list');
+                }
+            });
         }
     });
     
@@ -291,6 +360,7 @@ function funcListStrategy()
                     {
                         //-- handle strategys dropdown
                         document.getElementById('d-drop-strategys-txt').innerText = item.name;
+                        dropStrategys.setAttribute('class', 'w-dropdown-list');
                         
                         _the_pos = [];
                         /*for (let k = 1; k <= 10; k++)
@@ -487,8 +557,8 @@ function funcListPositions()
                 console.log(res);
                 let parent_trades = document.getElementById('d-div-trades');
                 parent_trades.innerHTML = "";
-                let lst_trades = document.getElementById('d-drop-positions-lst');
-                lst_trades.innerHTML = "";
+                let dropTrades = document.getElementById('d-drop-positions-lst');
+                dropTrades.innerHTML = "";
                 
                 let poss = Object.keys(res.message);
                 poss.forEach((f, i) =>
@@ -500,6 +570,16 @@ function funcListPositions()
                     let mee = __c_positionItem.replace('[ID]', 'd-div-trade-'+i);
                     mee = mee.replace('[SYMBOL]', item.vals.symbol);
                     mee = mee.replace('[SP]', item.sp+"%");
+                    mee = mee.replace('[SIDE]', item.vals.side);
+                    mee = mee.replace('[SIDE-CLASS]', (item.vals.side == 'LONG' ? 'd-button-long' : '-button-short'));
+                    mee = mee.replace('[FILLED]', '0');
+                    mee = mee.replace('[TOTAL]', item.total);
+                    mee = mee.replace('[ENTERY]', item.vals.entry);
+                    mee = mee.replace('[PRICE]', item.price);
+                    mee = mee.replace('[LIQUID]', '0');
+                    mee = mee.replace('[MARGIN]', Math.floor(item.amount*1000000)/1000000);
+                    mee = mee.replace('[PERCENT]', '0');
+                    mee = mee.replace('[STRATEGY]', item.vals.strategy);
                     document.getElementById('d-div-trades').insertAdjacentHTML('beforeend', mee);
 
                     let it = document.getElementById('d-div-trade-'+i);
@@ -511,15 +591,20 @@ function funcListPositions()
                     {
                         //e.path[1].setAttribute('class', e.path[1].getAttribute('class').replace('col-box-hover', 'col-box-item'));
                     }
+                    it.getElementsByClassName('d-button-close')[0].onclick = (e) =>
+                    {
+                        funcClosePosition(f);
+                    }
 
                     //-- add positions dropdown
                     mee = __c_dropdownItem.replace('[ID]', 'drop-positions-'+i);
                     mee = mee.replace('[TEXT]', item.vals.symbol);
-                    lst_trades.insertAdjacentHTML('beforeend', mee);
+                    dropTrades.insertAdjacentHTML('beforeend', mee);
                     document.getElementById('drop-positions-'+i).onclick = (e) =>
                     {
                         //-- handle positions dropdown
                         document.getElementById('d-drop-positions-txt').innerText = item.name;
+                        dropTrades.setAttribute('class', 'w-dropdown-list');
                         
                         //_the_pos = [];
                         //_the_pos.push({price: _the_price});
@@ -533,8 +618,41 @@ function funcListPositions()
                         }*/
                         //_the_pos.push({price: _the_price - (_the_price*strategys[i]['sp'])});
                     }
+                    //Add new Position's
                 });
+
+                //--add last position
+                let mee = __c_dropdownItem.replace('[ID]', 'drop-positions-'+poss.length);
+                mee = mee.replace('[TEXT]', "Add new Position's");
+                dropTrades.insertAdjacentHTML('beforeend', mee);
+                document.getElementById('drop-positions-'+poss.length).onclick = (e) =>
+                {
+                    //-- handle positions dropdown
+                    document.getElementById('d-drop-positions-txt').innerText = "Add new Position's";
+                    dropTrades.setAttribute('class', 'w-dropdown-list');
+                }
             }
+        }
+        else
+            toastr["error"]("Connection error ...!", "Position's");
+    });
+}
+
+
+//-- close a position
+function funcClosePosition(key)
+{
+    let __json = {'q' : 'CLOSE_POSITION', 'session' : session, 'key' : key};
+    deew.PostURL(api, __json, (code, res) =>
+    {
+        if(code == 200)
+        {
+            if(res.ok == true)
+            {
+                toastr["success"]("Position closed successfully!", "Position's");
+            }
+            else
+                toastr["error"](res.message, "Position's");
         }
         else
             toastr["error"]("Connection error ...!", "Position's");

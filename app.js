@@ -16,7 +16,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 var mongo, accounts = [], positions = {}, pids = 0, accsUpdate = false;
-var bin = new ccxt.binance({options:{'defaultType':'future', enableRateLimit: true}});;
+var bin = new ccxt.binance({options:{'defaultType':'future','adjustForTimeDifference': true}, enableRateLimit: true});;
 
 
 // MARK: mongo startup stuff ...
@@ -53,7 +53,7 @@ async function openup()
 {
     let key = 'Lbq9CdM34GLqQZ79pWaXH4nZv4Vvyen6ZyGNpdnzhosUmCn6Lx8SVvHDRP2gTH8o';
     let sec = 'iaFnEeHkL7ShD7WEO80myeWYv6GZhtJgaDOQbcLEi0zrwp6bvVI8D39a7t991IpR';
-    let acc = new ccxt.binance({options:{'defaultType':'future'}, apiKey: key, secret: sec, enableRateLimit: true});
+    let acc = new ccxt.binance({options:{'defaultType':'future','adjustForTimeDifference': true}, apiKey: key, secret: sec, enableRateLimit: true});
     console.log((await acc.fetchBalance()).USDT.total);
 
     let ords = await acc.fetchOrders('BTCUSDT');
@@ -78,14 +78,14 @@ async function openup()
 
     let key2 = 'KMGKgdKXIEmwCNUZKB';
     let sec2 = 'BtEbnBVTL1QPHwHeo1InZgYrrLbjZeUgNIzs';
-    let acc2 = new ccxt.bybit({options:{'defaultType':'future'}, apiKey: key2, secret: sec2, enableRateLimit: true});
+    let acc2 = new ccxt.bybit({options:{'defaultType':'future','adjustForTimeDifference': true}, apiKey: key2, secret: sec2, enableRateLimit: true});
     console.log((await acc2.fetchBalance()).USDT.total);
     //console.log(acc2.has);
     
     let key3 = '86d65e8a-6b83-424c-9e95-358a7aa60560';
     let sec3 = '6FDD545AE67B4C4431D8CE6C0226789F';
     let pass = '912#Test';
-    let acc3 = new ccxt.okex({options:{'defaultType':'future'}, apiKey: key3, secret: sec3, password: pass, enableRateLimit: true});
+    let acc3 = new ccxt.okex({options:{'defaultType':'future','adjustForTimeDifference': true}, apiKey: key3, secret: sec3, password: pass, enableRateLimit: true});
     console.log((await acc3.fetchBalance()).USDT.total);
 
     //console.log(JSON.stringify(await bin.fetchOHLCV ('BTCUSDT', timeframe = '5m', limit = 300)));
@@ -136,8 +136,13 @@ app.post('/API', async (req, res) =>
     if (link.pathname == "/API" || link.pathname == "/API/")
     {
         let resp = await HandleAPI(req.body);
+        try {
+            
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(resp));
+        } catch (error) {
+            console.log(resp);
+        }
     }
 });
 
@@ -304,6 +309,9 @@ async function HandleAPI(arg)
                 p.accounts = [];
                 p.total = 0;
                 p.qty_sum = 0;
+                p.price = 0;
+                p.amount = 0;
+                p.forceClose = false;
 
                 for (let i = 1; i <= 10; i++)
                     if(p.vals['tp_q_'+i])
@@ -353,12 +361,12 @@ async function HandleAPI(arg)
                                     await a.api.setLeverage(p.vals.lev, p.vals.symbol);
                                     
                                     let qtyUsd = a.qty2 == '$' ? a.qty : a.qty * a.balance / 100;
-                                    let amount = qtyUsd / p.vals.entry * p.vals.lev;
+                                    p.amount = qtyUsd / p.vals.entry * p.vals.lev;
                                     
                                     //console.log(p.vals.s);
                                     let type = p.vals.en_limit ? 'limit' : 'market';
                                     let side = p.vals.side == 'LONG' ? 'buy' : 'sell';
-                                    a.order = await a.api.createOrder (p.vals.symbol, type, side, amount, p.vals.entry);
+                                    a.order = await a.api.createOrder (p.vals.symbol, type, side, p.amount, p.vals.entry);
                                     
                                     if(!p.vals.en_limit)
                                         a.Enfill = true;
@@ -389,10 +397,12 @@ async function HandleAPI(arg)
                 break;
 
             case 'GET_POSITION_LIST':
-                job = { "ok": true, "message": positions };
+                job = { "ok": true, "message": {...positions} };
                 break;
 
             case 'CLOSE_POSITION':
+                positions[arg.key].forceClose = true;
+                job = { "ok": true, "message": 'CLOSE_POSITION_TRUE' };
                 break;
 
             case 'CLOSE_POSITION_ALL':
@@ -435,11 +445,11 @@ async function UpdateAccounts()
         try
         {
             if(a.broker == "Binance")
-                a.api = new ccxt.binance({options:{'defaultType':'future'}, apiKey: a.key, secret: a.secret, enableRateLimit: true});
+                a.api = new ccxt.binance({options:{'defaultType':'future','adjustForTimeDifference': true}, apiKey: a.key, secret: a.secret, enableRateLimit: true});
             if(a.broker == "Bybit")
-                a.api = new ccxt.bybit({options:{'defaultType':'future'}, apiKey: a.key, secret: a.secret, enableRateLimit: true});
+                a.api = new ccxt.bybit({options:{'defaultType':'future','adjustForTimeDifference': true}, apiKey: a.key, secret: a.secret, enableRateLimit: true});
             if(a.broker == "OKEX")
-                a.api = new ccxt.okex({options:{'defaultType':'future'}, apiKey: a.key, secret: a.secret, password: a.pass, enableRateLimit: true});
+                a.api = new ccxt.okex({options:{'defaultType':'future','adjustForTimeDifference': true}, apiKey: a.key, secret: a.secret, password: a.pass, enableRateLimit: true});
     
             a.balance = (await a.api.fetchBalance()).USDT.total;
         }
@@ -469,6 +479,7 @@ async function HandleTrades()
 
         p.accounts.forEach(async (a, i) =>
         {
+            p.price = now;
             if(a.imFree && !a.closed)
             {
                 a.imFree = false;
@@ -479,6 +490,11 @@ async function HandleTrades()
                     a.orderInfo = (await a.api.fetchOrder  (a.order.id, p.vals.symbol));
                     if(a.orderInfo.filled == a.orderInfo.amount)
                         a.Enfill = true;
+                    else if(p.forceClose)
+                    {
+                        await a.api.cancelOrder (a.order.id, p.vals.symbol);
+                        a.closed = true;
+                    }
                 }
                 else
                 {
@@ -572,7 +588,7 @@ async function HandleTrades()
         if(cc == p.total)
         {
             //save to database and delete from list's
-            delete f;
+            delete positions[f];
         }
     });
 }

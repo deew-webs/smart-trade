@@ -52,7 +52,7 @@ __c_positionItem = `<div id="[ID]" class="div-block-trade">
                             <div class="trade-box-vals">Mg : [MARGIN]</div>
                         </div>
                         <div class="div-block-r-vals">
-                            <div class="trade-box-v-strategy">strategy : some strategy name</div>
+                            <div class="trade-box-v-strategy">strategy : [STRATEGY]</div>
                         </div>
                         <div class="div-block-r-vals">
                             <div class="trade-box-v-accounts">ACCOUNTS : [FILLED] / [TOTAL]</div>
