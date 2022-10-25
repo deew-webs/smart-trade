@@ -27,7 +27,7 @@ var ctx;
 var centerPoint;
 var boundaries;
 var _the_symbol = "BTCUSDT", _the_timeframe = "5m";
-var _the_pos = [{'price':19950}, {'price':19680}, {'price':19550}];
+var _the_pos = [{'price':19950, 'lock':false}, {'price':19680, 'lock':false}, {'price':19550, 'lock':false}];
 var _the_price = 0;
 
 //amount of grid lines to evenly distribute for each axis

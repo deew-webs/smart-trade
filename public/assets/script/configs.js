@@ -41,7 +41,7 @@ __c_accountItem = `<div id="[ID]" class="col-box-item w-row">
 __c_positionItem = `<div id="[ID]" class="div-block-trade">
                         <div class="div-block-6">
                             <div class="trade-box-name">[SYMBOL]</div>
-                            <div class="trade-box-percent">[PERCENT]</div>
+                            <div class="trade-box-percent" style="color:[COLOR]">[PERCENT]</div>
                         </div>
                         <div class="div-block-r-vals">
                             <div class="trade-box-vals">En : [ENTERY]</div>

@@ -511,7 +511,7 @@ function funcOpenPosition(side)
         return;
     }
 
-    let side_factor = (side == "SHORT") ? -1 : 1;
+    let side_factor = (side == "LONG") ? -1 : 1;
     let sp = entry + (side_factor * entry * strategy['sp'] / 100);
     let __json = {'q': 'ADD_POSITION', 'session': session, 'symbol': symbol, 'entry': entry, 'side': side, 'qty': qty, 'qty2': qty2, 'lev': lev, 'en_limit': en_limit, 'strategy': strategy_name, 's': strategy, 'access': access, 'sp': sp};
     
@@ -564,22 +564,29 @@ function funcListPositions()
                 poss.forEach((f, i) =>
                 {
                     
-                    let item = res.message[f];
+                    let p = res.message[f];
 
                     //-- add positions items
                     let mee = __c_positionItem.replace('[ID]', 'd-div-trade-'+i);
-                    mee = mee.replace('[SYMBOL]', item.vals.symbol);
-                    mee = mee.replace('[SP]', item.sp+"%");
-                    mee = mee.replace('[SIDE]', item.vals.side);
-                    mee = mee.replace('[SIDE-CLASS]', (item.vals.side == 'LONG' ? 'd-button-long' : '-button-short'));
-                    mee = mee.replace('[FILLED]', '0');
-                    mee = mee.replace('[TOTAL]', item.total);
-                    mee = mee.replace('[ENTERY]', item.vals.entry);
-                    mee = mee.replace('[PRICE]', item.price);
+                    mee = mee.replace('[SYMBOL]', p.vals.symbol);
+                    mee = mee.replace('[SP]', p.sp+"%");
+                    mee = mee.replace('[SIDE]', p.vals.side);
+                    mee = mee.replace('[SIDE-CLASS]', (p.vals.side == 'LONG' ? 'd-button-long' : '-button-short'));
+                    mee = mee.replace('[TOTAL]', p.total);
+                    mee = mee.replace('[ENTERY]', p.vals.entry);
+                    mee = mee.replace('[PRICE]', p.price);
                     mee = mee.replace('[LIQUID]', '0');
-                    mee = mee.replace('[MARGIN]', Math.floor(item.amount*1000000)/1000000);
-                    mee = mee.replace('[PERCENT]', '0');
-                    mee = mee.replace('[STRATEGY]', item.vals.strategy);
+                    mee = mee.replace('[MARGIN]', Math.floor(p.amount*1000000)/1000000);
+                    mee = mee.replace('[STRATEGY]', p.vals.strategy);
+                    
+                    let fc = 0, perc = 0;
+                    p.accounts.forEach((a, i) => { if(a.Enfill) fc++; });
+
+                    perc = ((p.price - p.vals.entry) / p.vals.entry * 100) * (p.vals.side == 'LONG' ? 1 : -1) * p.vals.lev;
+
+                    mee = mee.replace('[FILLED]', fc);
+                    mee = mee.replace('[PERCENT]', (fc>0) ? (Math.floor(perc*100) / 100) + "%" : "0.00%");
+                    mee = mee.replace('[COLOR]', (perc>=0 ? 'green' : 'red'));
                     document.getElementById('d-div-trades').insertAdjacentHTML('beforeend', mee);
 
                     let it = document.getElementById('d-div-trade-'+i);
@@ -591,6 +598,10 @@ function funcListPositions()
                     {
                         //e.path[1].setAttribute('class', e.path[1].getAttribute('class').replace('col-box-hover', 'col-box-item'));
                     }
+                    it.getElementsByClassName('d-button-edit')[0].onclick = (e) =>
+                    {
+                        console.log(p);
+                    }
                     it.getElementsByClassName('d-button-close')[0].onclick = (e) =>
                     {
                         funcClosePosition(f);
@@ -598,12 +609,12 @@ function funcListPositions()
 
                     //-- add positions dropdown
                     mee = __c_dropdownItem.replace('[ID]', 'drop-positions-'+i);
-                    mee = mee.replace('[TEXT]', item.vals.symbol);
+                    mee = mee.replace('[TEXT]', p.vals.symbol);
                     dropTrades.insertAdjacentHTML('beforeend', mee);
                     document.getElementById('drop-positions-'+i).onclick = (e) =>
                     {
                         //-- handle positions dropdown
-                        document.getElementById('d-drop-positions-txt').innerText = item.name;
+                        document.getElementById('d-drop-positions-txt').innerText = p.vals.symbol;
                         dropTrades.setAttribute('class', 'w-dropdown-list');
                         
                         //_the_pos = [];

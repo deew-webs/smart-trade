@@ -16,7 +16,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 var mongo, accounts = [], positions = {}, pids = 0, accsUpdate = false;
-var bin = new ccxt.binance({options:{'defaultType':'future','adjustForTimeDifference': true}, enableRateLimit: true});;
+var bin = new ccxt.binance({options:{'defaultType':'future','adjustForTimeDifference': true}, enableRateLimit: true});
 
 
 // MARK: mongo startup stuff ...
@@ -413,6 +413,7 @@ async function HandleAPI(arg)
 
             case 'GET_OHLCV':
                 let ohlcv = (JSON.stringify(await bin.fetchOHLCV(arg.symbol, arg.timeframe, undefined, 300)));
+
                 job = { "ok": true, "message": ohlcv };
                 break;
 
@@ -501,7 +502,7 @@ async function HandleTrades()
                     let itsLong = p.vals.side == 'LONG';
                     
                     //code check orders filled or what
-                    if(a.order2 != {})
+                    if(Object.keys(a.order2) != 0)
                     {
                         a.orderInfo2 = (await a.api.fetchOrder  (a.order2.id, p.vals.symbol));
                         if(a.orderInfo2.filled == a.orderInfo2.amount)
@@ -526,10 +527,10 @@ async function HandleTrades()
                             a.tickerIsSp = true;
 
                             //code delete old order
-                            if(a.order2 != {})
+                            if(Object.keys(a.order2) != 0)
                                 await a.api.cancelOrder (a.order2.id, p.vals.symbol);
 
-                            let pos = await a.api.fetchPositions(p.vals.symbol);
+                            let pos = await a.api.fetchPositions([p.vals.symbol]);
                             if(pos.length > 0)
                             {
                                 //code order stoploss
@@ -550,7 +551,7 @@ async function HandleTrades()
                             a.tickerIsSp = false;
 
                             //code delete old order
-                            if(a.order2 != {})
+                            if(Object.keys(a.order2) != 0)
                                 await a.api.cancelOrder (a.order2.id, p.vals.symbol);
 
                             let pos = await a.api.fetchPositions(p.vals.symbol);
